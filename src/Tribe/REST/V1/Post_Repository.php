@@ -894,6 +894,9 @@ class Tribe__Tickets__REST__V1__Post_Repository
 			'modified'          => $attendee_post->post_modified,
 			'modified_utc'      => $attendee_post->post_modified_gmt,
 			'rest_url'          => $main->get_url( '/attendees/' . $attendee_id ),
+			// TODO: Remove below when auth finished
+			'email'             => Tribe__Utils__Array::get( $attendee, 'holder_email', Tribe__Utils__Array::get( $attendee, 'purchaser_email', '' ) ),
+			'provider'          => $this->get_provider_slug( $provider ),
 		);
 
 		$can_read_private_post = current_user_can( 'read_private_posts' );
