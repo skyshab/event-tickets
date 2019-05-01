@@ -168,13 +168,23 @@ if ( ! class_exists( 'Tribe__Tickets__Ticket_Object' ) ) {
 
 		/**
 		 * Number of tickets for which an order has been refunded.
-		 * Use $this->$qty_refunded( value ) to set manage and get the value
+		 * Use $this->qty_refunded( value ) to set manage and get the value
 		 *
 		 * @since 4.7.3
 		 *
 		 * @var int
 		 */
 		protected $qty_refunded = 0;
+
+		/**
+		 * Number of tickets for which an order has been completed
+		 * Use $this->qty_completed( value ) to set manage and get the value
+		 *
+		 * @since TBD
+		 *
+		 * @var int
+		 */
+		protected $qty_completed = 0;
 
 		/**
 		 * Holds whether or not stock is being managed
@@ -844,6 +854,9 @@ if ( ! class_exists( 'Tribe__Tickets__Ticket_Object' ) ) {
 				case 'qty_refunded':
 					return $this->qty_refunded();
 					break;
+				case 'qty_completed':
+					return $this->qty_completed();
+					break;
 				case 'qty_cancelled':
 					return $this->qty_cancelled();
 					break;
@@ -920,6 +933,28 @@ if ( ! class_exists( 'Tribe__Tickets__Ticket_Object' ) ) {
 
 			// return the new Qty Refunded
 			return $this->qty_refunded;
+		}
+
+		/**
+		 * Method to manage the protected `qty_completed` property of the Object
+		 * Prevents setting `qty_completed` lower then zero
+		 *
+		 * @since TBD
+		 *
+		 * @param int|null $value This will overwrite the old value
+		 * @return int
+		 */
+		public function qty_completed(  $value = null ) {
+			// If the Value was passed as numeric value overwrite
+			if ( is_numeric( $value ) ) {
+				$this->qty_completed = $value;
+			}
+
+			// Prevents qty_completed from going negative
+			$this->qty_completed = max( (int) $this->qty_completed, 0 );
+
+			// return the new Qty Refunded
+			return $this->qty_completed;
 		}
 
 		/**
