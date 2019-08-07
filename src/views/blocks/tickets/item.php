@@ -45,4 +45,5 @@ if (
 	<?php $this->template( 'blocks/tickets/content', $context ); ?>
 	<?php $this->template( 'blocks/tickets/extra', $context ); ?>
 	<?php $this->template( 'blocks/tickets/quantity', $context ); ?>
+	<?php $this->template( 'blocks/tickets/commerce/opt-out-' . $provider_id, array( 'ticket' => $ticket ) ); ?>
 </div>
